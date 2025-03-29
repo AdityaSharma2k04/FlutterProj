@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("Flutter Container"),
       ),
-      body: Center(child: Container(
+      body: Center(child: SizedBox(
           width: 1080,
           height: 1920,
           child: Image.asset('assets/images/3231246.png'))),
