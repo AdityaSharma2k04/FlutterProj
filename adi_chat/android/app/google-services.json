@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "858989998310",
+    "project_id": "chatapp-9ad29",
+    "storage_bucket": "chatapp-9ad29.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858989998310:android:2d9c424b26f90f851f8b27",
+        "android_client_info": {
+          "package_name": "com.example.adi_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858989998310-ke8bqcdvnskjn834rscug2idhq6pk26v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.adi_chat",
+            "certificate_hash": "c27420c5a1af5b5dd21c462c135fc1f33166732f"
+          }
+        },
+        {
+          "client_id": "858989998310-9l5j8s4os568tpqf7e03o1u8ahc5lkll.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA39wHfr8SPWZtP7Dv0mg-S80z-prqYgDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858989998310-9l5j8s4os568tpqf7e03o1u8ahc5lkll.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "858989998310-3f31u8mv85qhicpb4c2igdsre6cs7g3p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.adiChat"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858989998310:android:325d2c01caa1291c1f8b27",
+        "android_client_info": {
+          "package_name": "com.example.my_first_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858989998310-9l5j8s4os568tpqf7e03o1u8ahc5lkll.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA39wHfr8SPWZtP7Dv0mg-S80z-prqYgDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858989998310-9l5j8s4os568tpqf7e03o1u8ahc5lkll.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "858989998310-3f31u8mv85qhicpb4c2igdsre6cs7g3p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.adiChat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
