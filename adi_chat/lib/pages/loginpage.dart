@@ -37,26 +37,33 @@ class _LoginPageState extends State<LoginPage> {
       log("\nUser: ${user?.user}");
       log("\nUserAdditionalInfo: ${user?.additionalUserInfo}");
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => HomeScreen()),
-      );
+      if (await APIs.user_exists()) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => HomeScreen()),
+        );
+      } else {
+        APIs.create_user().then((value) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => HomeScreen()),
+          );
+        });
+      }
     } catch (e) {
       log("Error signing in with Google: $e");
     }
   }
 
-
-
   Future<UserCredential?> _signInWithGoogle() async {
-    try{
+    try {
       await InternetAddress.lookup('google.com');
       // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
       // Obtain the auth details from the request
       final GoogleSignInAuthentication? googleAuth =
-      await googleUser?.authentication;
+          await googleUser?.authentication;
 
       // Create a new credential
       final credential = GoogleAuthProvider.credential(
@@ -66,10 +73,9 @@ class _LoginPageState extends State<LoginPage> {
 
       // Once signed in, return the UserCredential
       return await APIs.auth.signInWithCredential(credential);
-    }
-    catch(e){
+    } catch (e) {
       log('\n Sign in with google: $e');
-      Dialogs.showSnackBar(context,"Something Went Wrong");
+      Dialogs.showSnackBar(context, "Something Went Wrong");
       return null;
     }
   }

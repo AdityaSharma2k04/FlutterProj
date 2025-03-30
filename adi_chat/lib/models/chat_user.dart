@@ -10,7 +10,8 @@ class ChatUser {
   String? email;
 
   ChatUser(
-      {this.image,
+      {
+        this.image,
         this.name,
         this.about,
         this.createdAt,
@@ -21,15 +22,15 @@ class ChatUser {
         this.email});
 
   ChatUser.fromJson(Map<String, dynamic> json) {
-    image = json['image'];
-    name = json['name'];
-    about = json['about'];
-    createdAt = json['created_at'];
-    isOnline = json['is_online'];
-    lastActive = json['last_active'];
-    id = json['id'];
-    pushToken = json['push_token'];
-    email = json['email'];
+    image = json['image'] ?? "";
+    name = json['name'] ?? "";
+    about = json['about'] ?? "";
+    createdAt = json['created_at'] ?? "";
+    isOnline = json['is_online'] ?? "";
+    lastActive = json['last_active'] ?? "";
+    id = json['id'] ?? "";
+    pushToken = json['push_token'] ?? "";
+    email = json['email'] ?? "";
   }
 
   Map<String, dynamic> toJson() {

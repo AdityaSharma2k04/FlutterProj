@@ -3,8 +3,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'firebase_options.dart';
 import 'pages/splashScreen.dart';
-import 'package:flutter/widgets.dart';
 
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+
+void clearCache() {
+  DefaultCacheManager().emptyCache();
+}
 late Size mq;
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
