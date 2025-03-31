@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:adi_chat/api/api.dart';
+import 'package:adi_chat/pages/phonelogin.dart';
 import '../Helper/dialog.dart';
 import 'package:adi_chat/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -120,6 +121,34 @@ class _LoginPageState extends State<LoginPage> {
                     TextSpan(text: "Login with "),
                     TextSpan(
                       text: "Google",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: mq.height * .1,
+            width: mq.width * .9,
+            left: mq.width * .05,
+            height: mq.height * 0.07,
+            child: ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                shape: StadiumBorder(),
+                elevation: 1,
+              ),
+              onPressed: () {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => PhoneLogin()));
+              },
+              icon: Icon(Icons.phone, size: 40,),
+              label: RichText(
+                text: TextSpan(
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                  children: [
+                    TextSpan(text: "Login with "),
+                    TextSpan(
+                      text: "Phone Number",
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
                   ],

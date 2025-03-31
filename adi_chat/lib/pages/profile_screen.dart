@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:adi_chat/models/chat_user.dart';
 import 'package:adi_chat/pages/home.dart';
 import 'package:adi_chat/pages/loginPage.dart';
@@ -19,7 +21,15 @@ class UserProfile extends StatefulWidget {
 
 class _UserProfileState extends State<UserProfile> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    log(
+      'Email: ${widget.user.email}, Phone: ${widget.user.phoneNumber}, Name: ${widget.user.name}',
+    );
     return Scaffold(
       appBar: AppBar(
         leading: TextButton(
@@ -72,7 +82,11 @@ class _UserProfileState extends State<UserProfile> {
             ),
             SizedBox(height: mq.height * 0.03),
             Text(
-              widget.user.email ?? ' ',
+              widget.user.email?.isNotEmpty == true
+                  ? widget.user.email!
+                  : widget.user.phoneNumber?.isNotEmpty == true
+                  ? widget.user.phoneNumber!
+                  : "No Contact Info",
               style: TextStyle(color: Colors.black54, fontSize: 16),
             ),
             SizedBox(height: mq.height * 0.05),

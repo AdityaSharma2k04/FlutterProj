@@ -17,6 +17,11 @@ class _HomeScreenState extends State<HomeScreen> {
   List<ChatUser> list = [];
 
   @override
+  void initState() {
+    super.initState();
+    APIs.getSelfInfo();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -25,9 +30,15 @@ class _HomeScreenState extends State<HomeScreen> {
         shadowColor: Colors.black,
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(CupertinoIcons.search)),
-          IconButton(onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => UserProfile(user: list[0])));
-          }, icon: Icon(Icons.more_vert)),
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => UserProfile(user: APIs.me)),
+              );
+            },
+            icon: Icon(Icons.more_vert),
+          ),
         ],
       ),
       floatingActionButton: Padding(
@@ -39,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: StreamBuilder(
-        stream: APIs.firestore.collection('users').snapshots(),
+        stream: APIs.getAllUser(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -50,7 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
               final data = snapshot.data?.docs;
               list =
                   data?.map((e) => ChatUser.fromJson(e.data())).toList() ?? [];
-
               if (list.isEmpty) {
                 return const Center(
                   child: Text(

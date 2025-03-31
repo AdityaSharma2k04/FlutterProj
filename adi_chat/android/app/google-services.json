@@ -48,42 +48,6 @@
           ]
         }
       }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:858989998310:android:325d2c01caa1291c1f8b27",
-        "android_client_info": {
-          "package_name": "com.example.my_first_project"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "858989998310-9l5j8s4os568tpqf7e03o1u8ahc5lkll.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA39wHfr8SPWZtP7Dv0mg-S80z-prqYgDw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "858989998310-9l5j8s4os568tpqf7e03o1u8ahc5lkll.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "858989998310-3f31u8mv85qhicpb4c2igdsre6cs7g3p.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.adiChat"
-              }
-            }
-          ]
-        }
-      }
     }
   ],
   "configuration_version": "1"
