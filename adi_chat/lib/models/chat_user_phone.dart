@@ -1,16 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ChatUserPhone {
-  String? phoneNumber;
-  String image;
-  String? name;
-  String about;
-  String createdAt;
-  bool isOnline;
-  String lastActive;
-  String id;
-  String pushToken;
-  String? email; // Email should not be initialized to null explicitly
+  late String? image;
+  late String? name;
+  late String? about;
+  late String? createdAt;
+  late bool? isOnline;
+  late String? lastActive;
+  late String? id;
+  late String? pushToken;
+  late String? email;
+  late String? phoneNumber;
 
   ChatUserPhone({
     required this.phoneNumber,
@@ -29,8 +29,7 @@ class ChatUserPhone {
   factory ChatUserPhone.fromFirebaseUser(User user) {
     return ChatUserPhone(
       phoneNumber: user.phoneNumber, // Ensure we store correct phone number
-      image: user.photoURL ??
-          'https://lh3.googleusercontent.com/a/ACg8ocLLCWm_oxt987w3qgmBTYGz_T6Wu9Rf--NC7XynAAjfDIig1w=s96-c',
+      image: user.photoURL,
       name: user.displayName ?? user.phoneNumber ?? "Unknown User",
       about: "Hey there! I'm using this app.",
       createdAt: user.metadata.creationTime?.toIso8601String() ?? "",

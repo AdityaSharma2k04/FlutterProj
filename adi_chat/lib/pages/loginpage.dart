@@ -1,9 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:adi_chat/api/api.dart';
-import 'package:adi_chat/pages/phonelogin.dart';
+import 'package:ChataKai/api/api.dart';
+import 'package:ChataKai/pages/phonelogin.dart';
+import 'package:flutter/services.dart';
 import '../Helper/dialog.dart';
-import 'package:adi_chat/pages/home.dart';
+import 'package:ChataKai/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -85,10 +86,13 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     mq = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("Welcome to Adi Chat"),
-        leading: Icon(Icons.arrow_back_outlined),
+        title: Text("Welcome to ChataKai"),
+        leading: IconButton(icon: Icon(Icons.arrow_back_outlined), onPressed: (){
+          SystemNavigator.pop();
+        },),
       ),
 
       body: Stack(
@@ -98,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
             top: mq.height * .15,
             width: mq.width * .5,
             right: _isAnimate ? mq.width * .25 : -mq.width * .5,
-            child: Image.asset("assets/images/chat.png"),
+            child: Image.asset("assets/images/chatakai_notext.png"),
           ),
           Positioned(
             bottom: mq.height * .2,

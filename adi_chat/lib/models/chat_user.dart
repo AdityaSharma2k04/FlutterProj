@@ -1,14 +1,14 @@
 class ChatUser {
-  String? image;
-  String? name;
-  String? about;
-  String? createdAt;
-  bool? isOnline;
-  String? lastActive;
-  String? id;
-  String? pushToken;
-  String? email;
-  String? phoneNumber;
+  late String? image;
+  late String? name;
+  late String? about;
+  late String? createdAt;
+  late bool? isOnline;
+  late String? lastActive;
+  late String? id;
+  late String? pushToken;
+  late String? email;
+  late String? phoneNumber;
 
   ChatUser({
     this.image,
