@@ -36,6 +36,7 @@ class _UserProfileState extends State<UserProfile> {
   String? setImage = null;
   @override
   Widget build(BuildContext context) {
+    mq = MediaQuery.of(context).size;
     final _formKey = GlobalKey<FormState>();
 
     return GestureDetector(
@@ -264,7 +265,7 @@ class _UserProfileState extends State<UserProfile> {
                       await APIs.updateUserProfile(File(setImage!));
                     }
                   },
-                  child: Image.asset("assets/images/add_image.png"),
+                  child: Icon(Icons.image, size: 80,),
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -285,7 +286,7 @@ class _UserProfileState extends State<UserProfile> {
                       await APIs.updateUserProfile(File(setImage!));
                     }
                   },
-                  child: Image.asset("assets/images/camera.png"),
+                  child: Icon(Icons.camera_alt_rounded, size: 80,),
                 ),
               ],
             ),
