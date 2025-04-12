@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'dart:ui';
 
+import 'package:ChataKai/models/message.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:developer';
@@ -60,6 +62,9 @@ class APIs {
 
     log("Creating phone user with UID: ${user.uid}");
     log("User Phone Number: ${user.phoneNumber}");
+    final now = DateTime.now();
+    final lastSeen =
+        '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
 
     final chatUserPhone = ChatUserPhone(
       id: user.uid,
@@ -72,11 +77,9 @@ class APIs {
       about: "Hey, I'm using Adi Chat",
       createdAt: time,
       isOnline: false,
-      lastActive: time,
+      lastActive: lastSeen,
       pushToken: '',
     );
-
-    log("Storing Phone User: ${chatUserPhone.toJson()}");
 
     await firestore
         .collection("users")
@@ -98,6 +101,18 @@ class APIs {
     });
   }
 
+  static Future<void> updateActiveStatus(bool isOnline) async {
+    await firestore.collection("users").doc(user.uid).update({
+      'is_online': isOnline,
+    });
+  }
+
+  static Future<void> updateLastSeen(String last_seen) async {
+    await firestore.collection("users").doc(user.uid).update({
+      'last_active': last_seen,
+    });
+  }
+
   static Future<void> updateUserProfile(File file) async {
     try {
       final ext = file.path.split('.').last;
@@ -116,6 +131,79 @@ class APIs {
       });
     } catch (e) {
       log("Error updating profile picture: $e");
+    }
+  }
+
+  static String getConversationId(String id) =>
+      user.uid.hashCode <= id.hashCode
+          ? "${user.uid}_$id"
+          : "${id}_${user.uid}";
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllMessages(
+    ChatUser chatUser,
+  ) {
+    return firestore
+        .collection('UserChats/${getConversationId(chatUser.id!)}/messages/')
+        .orderBy('sent', descending: false)
+        .snapshots();
+  }
+
+  static Future<void> sendMessage(ChatUser chatUser, String msg, Type type) async {
+    final time = DateTime.now().millisecondsSinceEpoch.toString();
+    final Message message = Message(
+      msg: msg,
+      toId: chatUser.id,
+      read: '',
+      type: type,
+      fromId: user.uid,
+      sent: time,
+    );
+    final ref = firestore.collection(
+      'UserChats/${getConversationId(chatUser.id!)}/messages/',
+    );
+    await ref.doc(time).set(message.toJson());
+  }
+
+  static Future<void> updateReadTime(Message message) async {
+    try {
+      final fromId = message.fromId;
+      if (fromId == null) throw Exception('Message fromId is null');
+
+      await firestore
+          .collection('UserChats/${getConversationId(fromId)}/messages')
+          .doc(message.sent)
+          .update({'read': DateTime.now().millisecondsSinceEpoch.toString()});
+    } catch (e) {
+      print('Failed to update read time: $e');
+      // You can handle the error further, like logging or showing UI messages
+    }
+  }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getLastMessages(
+    ChatUser chatUser,
+  ) {
+    return firestore
+        .collection('UserChats/${getConversationId(chatUser.id!)}/messages/')
+        .orderBy('sent', descending: true)
+        .limit(1)
+        .snapshots();
+  }
+
+  static Future<void> sendChatImage(ChatUser chatUser, File file) async {
+    try {
+      final ext = file.path.split('.').last;
+      final ref = storage.ref().child("images/${getConversationId(chatUser.id!)}/${DateTime.now().millisecondsSinceEpoch}.$ext");
+
+      // Upload file with metadata
+      await ref.putFile(file, SettableMetadata(contentType: "image/$ext"));
+
+      // Get download URL
+      final imageUrl = await ref.getDownloadURL();
+
+      // Update Firestore with image URL
+      await sendMessage(chatUser, imageUrl, Type.image);
+    } catch (e) {
+      log("Error Sending Image: $e");
     }
   }
 }

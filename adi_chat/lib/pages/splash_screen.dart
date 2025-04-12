@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 
 import '../api/api.dart';
 import '../main.dart';
-import 'loginPage.dart';
+import 'login_page.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -22,7 +22,7 @@ class _Splashscreen extends State<Splashscreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 2),(){
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(systemNavigationBarColor: Colors.white));
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(systemNavigationBarColor: Colors.white, statusBarColor: Colors.white));
       if(APIs.auth.currentUser != null){
         log("\nUser: ${APIs.auth.currentUser}");
         Navigator.pushReplacement(context, MaterialPageRoute(builder:  (_) => const HomeScreen()));

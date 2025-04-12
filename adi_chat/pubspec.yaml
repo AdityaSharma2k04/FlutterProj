@@ -48,6 +48,7 @@ dependencies:
   image_cropper: ^9.1.0
   permission_handler: ^11.4.0
   flutter_svg: ^2.0.17
+  emoji_picker_flutter: ^4.3.0
 
   # ✅ Misc
   flutter_markdown: ^0.6.0

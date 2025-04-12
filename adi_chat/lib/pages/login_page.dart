@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:ChataKai/api/api.dart';
-import 'package:ChataKai/pages/phonelogin.dart';
+import 'package:ChataKai/pages/phone_login.dart';
 import 'package:flutter/services.dart';
 import '../Helper/dialog.dart';
 import 'package:ChataKai/pages/home.dart';
@@ -40,15 +40,15 @@ class _LoginPageState extends State<LoginPage> {
       log("\nUserAdditionalInfo: ${user?.additionalUserInfo}");
 
       if (await APIs.user_exists()) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => HomeScreen()),
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+              (route) => false,
         );
       } else {
         APIs.create_user().then((value) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => HomeScreen()),
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+                (route) => false,
           );
         });
       }
@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                 elevation: 1,
               ),
               onPressed: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => PhoneLogin()));
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => PhoneLogin()));
               },
               icon: Icon(Icons.phone, size: 40,),
               label: RichText(

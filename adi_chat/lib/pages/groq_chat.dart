@@ -8,16 +8,16 @@ import 'package:ChataKai/Helper/local_storage_groq.dart';
 
 import '../models/chat_user.dart';
 
-class GAIChatScreen extends StatefulWidget {
-  const GAIChatScreen({super.key, required this.user});
+class KAIChatScreen extends StatefulWidget {
+  const KAIChatScreen({super.key, required this.user});
 
   final ChatUser user;
 
   @override
-  _GAIChatScreenState createState() => _GAIChatScreenState();
+  _KAIChatScreenState createState() => _KAIChatScreenState();
 }
 
-class _GAIChatScreenState extends State<GAIChatScreen> {
+class _KAIChatScreenState extends State<KAIChatScreen> {
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   final List<ChatMessage> _messages = [];
@@ -131,25 +131,16 @@ class _GAIChatScreenState extends State<GAIChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: PopScope(
-        canPop: false,
-        onPopInvokedWithResult: (bool didPop, Object? result) {
-          if (!didPop) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (_) => HomeScreen()),
-            );
-          }
-        },
+    return SafeArea(
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
           appBar: AppBar(
             leading: IconButton(
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => HomeScreen()),
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                      (route) => false,
                 );
               },
               icon: Icon(Icons.arrow_back),
